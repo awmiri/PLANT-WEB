@@ -1,0 +1,17 @@
+.custom-animation {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.custom-animation::before {
+  content: " ";
+  height: 2px;
+  width: 0px;
+  background-color: #417f56;
+  transition: all 150ms ease-in;
+}
+
+.custom-animation:hover::before {
+  width: 20px;
+}
