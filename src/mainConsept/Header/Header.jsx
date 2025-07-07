@@ -12,7 +12,7 @@ export default function Header({ openMenu, setOpenMenu }) {
         <div className='flex items-center justify-between'>
             <div className='py-6 '>
                 <div className='flex items-center gap-3 lg:gap-6 '>
-                    <div className='w-8 h-8 bg-customgray text-customBlack rounded-lg higherSM:hidden flex items-center justify-center cursor-pointer' onClick={openBarHandler} >
+                    <div className='w-8 h-8 bg-customgray text-customBlack rounded-lg sm:hidden flex items-center justify-center cursor-pointer' onClick={openBarHandler} >
                         <svg className="w-6 h-6 text-customBlack dark:text-white " aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" className='text-customBlack' />
                         </svg>
