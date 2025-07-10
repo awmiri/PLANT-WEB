@@ -3,6 +3,7 @@ import './login.css'
 
 
 export default function SignupPage() {
+
     const [focusesMobile, setFocusesMobile] = useState(false)
     const [focusesEmail, setFocusesEmail] = useState(false)
     const [focusesPassword, setFocusesPassword] = useState(false)
@@ -45,6 +46,31 @@ export default function SignupPage() {
                             </svg>
 
                         </div>
+                        {
+                            focusesPassword && (
+                                <div className='flex gap-3'>
+                                    {
+                                        Password.length < 8 ? (
+                                            <p className='text-red-500 text-sm -mt-5'>تعداد کاراکتر کمتز از هشت حرف است</p>
+                                        ) : Password.length === 8 ? (
+                                            <p className='text-yellow-400 text-sm -mt-5'>تعداد کاراکتر دقیقا هشت حرف است</p>
+                                        ) : (
+                                            <p className='text-green-500 text-sm -mt-5'>تعداد کاراکتر بیشتر از هشت حرف است</p>
+                                        )
+                                    }
+                                    {
+                                        Password === "" ? (
+                                            <p className='text-red-500 text-sm -mt-5'>حرف اول بزرگ نیست</p>
+                                        ) : Password.charAt(0) === Password.charAt(0).toUpperCase() ? (
+                                            <p className='text-green-500 text-sm -mt-5'>حرف اول بزرگ است</p>
+                                        ) : (
+                                            <p className='text-red-500 text-sm -mt-5'>حرف اول بزرگ نیست</p>
+                                        )
+
+                                    }
+                                </div>
+                            )
+                        }
                         <div className={`border-2 ${!focusesPassword ? 'border-customgray3' : 'border-hightGreen'} rounded-xl flex relative gap-2 w-full py-3 px-3.5 text-customgray3 transition`}>
                             <label htmlFor="" className={`absolute bg-white ${!focusesRePass ? 'right-10' : '-top-4 right-4 text-hightGreen'} transition-all duration-300 ease-in-out pointer-events-none font-vazirLight`}>تکرار رمز عبور</label>
                             <div className='w-full flex items-center'>
@@ -66,7 +92,7 @@ export default function SignupPage() {
                             }
                         </div>
 
-                        <button className='bg-hightGreen py-3 text-white rounded-xl font-vazirMediom cursor-pointer'>ثبت نام</button>
+                        <button className='bg-hightGreen py-3 text-white rounded-xl font-vazirMediom cursor-pointer' disabled={Password.length < 8 || Password !== RePass || Password.charAt(0) !== Password.charAt(0).toUpperCase() || Mobile.length !== 11} >ثبت نام</button>
 
                         <p className='text-center font-vazirMediom'>حساب کاربری دارید؟<a href="" className='text-hightGreen'>ورود</a>کنید</p>
 
