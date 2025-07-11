@@ -18,10 +18,10 @@ export default function SignupPage() {
 
     return (
         <>
-            <div className='w-full h-full flex flex-col items-center justify-center'>
-                <div className='w-[540px] h-[485px] flex flex-col items-start justify-center'>
-                    <h2 className='text-customBlack font-vazirBold mb-8 text-xl'>ثبت نام</h2>
-                    <form action="" className='w-full flex flex-col gap-6'>
+            <div className='w-full h-auto higherSM:h-full flex flex-col items-center justify-center -bottom-3 py-4 higherSM:py-0 bg-white absolute  higherSM:relative rounded-l-[20px] rounded-r-[20px] '>
+                <div className='w-64 md:w-96 xl:w-[540px] h-[485px] flex flex-col items-center higherSM:items-start justify-center'>
+                    <h2 className='text-customBlack font-vazirBold  mb-6 higherSM:mb-8 text-xl'>ثبت نام</h2>
+                    <form action="" className='w-full flex flex-col gap-4 higherSM:gap-6'>
                         <div className={`border-2 ${!focusesMobile ? 'border-customgray3' : 'border-hightGreen'} rounded-xl flex relative gap-2 w-full py-3 px-3.5 text-customgray3 transition`}>
                             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`size-6 ${!focusesMobile ? 'text-customgray3' : 'text-hightGreen'} transition`}>
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
@@ -55,20 +55,20 @@ export default function SignupPage() {
                                 <div className='flex gap-3'>
                                     {
                                         Password.length < 8 ? (
-                                            <p className='text-red-500 text-sm -mt-5'>تعداد کاراکتر کمتز از هشت حرف است</p>
+                                            <p className='text-red-500 text-[10px] higherSM:text-sm -mt-3 higherSM:-mt-5'>تعداد کاراکتر کمتز از هشت حرف است</p>
                                         ) : Password.length === 8 ? (
-                                            <p className='text-yellow-400 text-sm -mt-5'>تعداد کاراکتر دقیقا هشت حرف است</p>
+                                            <p className='text-yellow-400 text-[10px] higherSM:text-sm -mt-3 higherSM:-mt-5'>تعداد کاراکتر دقیقا هشت حرف است</p>
                                         ) : (
-                                            <p className='text-green-500 text-sm -mt-5'>تعداد کاراکتر بیشتر از هشت حرف است</p>
+                                            <p className='text-green-500 text-[10px] higherSM:text-sm -mt-3 higherSM:-mt-5'>تعداد کاراکتر بیشتر از هشت حرف است</p>
                                         )
                                     }
                                     {
                                         Password === "" ? (
-                                            <p className='text-red-500 text-sm -mt-5'>حرف اول بزرگ نیست</p>
+                                            <p className='text-red-500 text-[10px] higherSM:text-sm -mt-3 higherSM:-mt-5'>حرف اول بزرگ نیست</p>
                                         ) : Password.charAt(0) === Password.charAt(0).toUpperCase() ? (
-                                            <p className='text-green-500 text-sm -mt-5'>حرف اول بزرگ است</p>
+                                            <p className='text-green-500 text-[10px] higherSM:text-sm -mt-3 higherSM:-mt-5'>حرف اول بزرگ است</p>
                                         ) : (
-                                            <p className='text-red-500 text-sm -mt-5'>حرف اول بزرگ نیست</p>
+                                            <p className='text-red-500 text-[10px] higherSM:text-sm -mt-3 higherSM:-mt-5'>حرف اول بزرگ نیست</p>
                                         )
 
                                     }
@@ -91,7 +91,7 @@ export default function SignupPage() {
                         <div>
                             {
                                 focusesRePass && (
-                                    Password === RePass ? <p className="text-hightGreen text-sm -mt-5">یکسان</p> : <p className="text-red-500 text-sm -mt-5">یکسان نیستن</p>
+                                    Password === RePass ? <p className="text-hightGreen text-[10px] higherSM:text-sm -mt-3 higherSM:-mt-5">یکسان</p> : <p className="text-red-500 text-sm -mt-5">یکسان نیستن</p>
                                 )
                             }
                         </div>
@@ -103,7 +103,7 @@ export default function SignupPage() {
                     </form>
                 </div >
             </div >
-            <img src="./image/loginimg/loginpic.png" alt="" className="max-w-full max-h-full object-contain" />
+            <img src="./image/loginimg/loginpic.png" alt="" className="w-screen h-screen higherSM:w-[350px] lg:w-auto higherSM:mx-auto" />
         </>
     )
 }
