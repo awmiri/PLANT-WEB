@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router'
 import './login.css'
 
 
+
 export default function SignupPage() {
     // use focuse and blur hook for input
     const [focusesMobile, setFocusesMobile] = useState(false)
@@ -24,13 +25,31 @@ export default function SignupPage() {
     // form submit event
     let handleSubmit = (e) => {
         e.preventDefault()
-        Navigate('/') // redirect to the main menu
+        let createUser = {
+            name: '',
+            lastname: '',
+            mobile: Mobile,
+            password: Password,
+            address: '',
+            img: '',
+            hometel: '',
+            email: Email,
+        }
+
+        fetch('https://plant-user-b02ad-default-rtdb.firebaseio.com/user.json', {
+            method: 'POST',
+            body: JSON.stringify(createUser)
+        }).then(res => console.log(res))
+        // Navigate('/') // redirect to the main menu
     }
+    // change between sign in and login page
     const [goLoginPage, setgoLoginPage] = useState(false)
     let goLoginPageHandler = (e) => {
         e.preventDefault()
         setgoLoginPage(prev => (!prev))
     }
+    // 
+
     return (
         <>
             {/* // form content */}
