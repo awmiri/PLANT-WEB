@@ -162,7 +162,7 @@ export default function SignupPage() {
                 </div >
                 {/* // login form content */}
                 <div className={`w-64 md:w-96 xl:w-[540px] h-[485px]  ${goLoginPage ? 'flex' : ' hidden rotate-y-180'} flex-col items-center higherSM:items-start justify-center transition`}>
-                    {<LoginPage showpass={showPassword} setshowpass={setShowPassword} password={Password} setpassword={setPassword} goLoginPageHandler={goLoginPageHandler} setFocusesPassword={setFocusesPassword} FocusesPassword={focusesPassword} focusesMobile={focusesMobile} setFocusesMobile={setFocusesMobile} Mobile={Mobile} setMobile={setMobile} handleSubmit={handleSubmit} />}
+                    {<LoginPage />}
                 </div >
             </div >
             {/* // page img */}
