@@ -20,35 +20,65 @@ export default function SignupPage() {
     // add show pass event for pass input
     const [showPassword, setShowPassword] = useState(false)
     const [showRePass, setShowRepass] = useState(false)
+    // hook for animation on sign up dtn
+    const [load, setLoad] = useState(false)
+    // save user
+    const [User, setUser] = useState()
     // use navigate hook for redirect us to the main menu
     const Navigate = useNavigate()
     // form submit event
-    let handleSubmit = (e) => {
+    let handleSubmit = async (e) => {
         e.preventDefault()
-        let createUser = {
+        setLoad(true)
+        const iranMobileRegex = /^09[0-9]{9}$/;
+        if (!iranMobileRegex.test(Mobile)) {
+            alert("شماره موبایل معتبر نیست! باید با 09 شروع شود و 11 رقم داشته باشد.");
+            return;
+        }
+
+        let newUser = {
             name: '',
             lastname: '',
-            mobile: Mobile,
+            phonenumber: Mobile,
             password: Password,
             address: '',
             img: '',
-            hometel: '',
+            homenumber: '',
+            created_at: new Date().toISOString(),
             email: Email,
+            card: null,
         }
-
-        fetch('https://plant-user-b02ad-default-rtdb.firebaseio.com/user.json', {
+        fetch('https://xeybfyeppnzqsirbngwv.supabase.co/rest/v1/user', {
             method: 'POST',
-            body: JSON.stringify(createUser)
-        }).then(res => console.log(res))
+            headers: {
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhleWJmeWVwcG56cXNpcmJuZ3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NjQwMzAsImV4cCI6MjA2ODA0MDAzMH0.Ej3w1QqhnR2XwmsTNhV59iDBKEFsz-Npzfg99-5paio',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhleWJmeWVwcG56cXNpcmJuZ3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NjQwMzAsImV4cCI6MjA2ODA0MDAzMH0.Ej3w1QqhnR2XwmsTNhV59iDBKEFsz-Npzfg99-5paio',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newUser)
+        })
+            .then(res => {
+                setUser(newUser)
+                res.json()
+            })
+            .then(data => console.log(data))
+            .finally(() => setLoad(false))
+
+        setMobile('')
+        setEmail('')
+        setPassword('')
+        setRepass('')
+
         // Navigate('/') // redirect to the main menu
     }
+
     // change between sign in and login page
     const [goLoginPage, setgoLoginPage] = useState(false)
     let goLoginPageHandler = (e) => {
         e.preventDefault()
         setgoLoginPage(prev => (!prev))
     }
-    // 
+
 
     return (
         <>
@@ -154,7 +184,7 @@ export default function SignupPage() {
                             }
                         </div>
                         {/* // form button */}
-                        <button className='bg-hightGreen py-3 text-white rounded-xl font-vazirMediom cursor-pointer' disabled={Password.length < 8 || Password !== RePass || Password.charAt(0) !== Password.charAt(0).toUpperCase() || Mobile.length !== 11} >ثبت نام</button>
+                        <button className={`bg-hightGreen py-3 text-white rounded-xl font-vazirMediom cursor-pointer ${load ? 'opacity-50' : ''}`} disabled={Password.length < 8 || Password !== RePass || Password.charAt(0) !== Password.charAt(0).toUpperCase() || Mobile.length !== 11} >{load ? 'درحال دریافت اطلاغات' : 'ثبت نام'}</button>
                         {/* // change content between login and Signup */}
                         <p className='text-center font-vazirMediom'>حساب کاربری دارید؟<a href="" className='text-hightGreen' onClick={goLoginPageHandler}>ورود</a>کنید</p>
 
