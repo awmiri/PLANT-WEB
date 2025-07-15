@@ -48,7 +48,7 @@ export default function SignupPage() {
             homenumber: '',
             created_at: new Date().toISOString(),
             email: Email,
-            card: null,
+            card: [],
         }
         fetch('https://xeybfyeppnzqsirbngwv.supabase.co/rest/v1/user', {
             method: 'POST',
@@ -65,7 +65,9 @@ export default function SignupPage() {
                 setstatus(res.status)
             })
             .then(data => console.log(data))
-            .finally(() => setLoad(false))
+            .finally(() => {
+                setLoad(false)
+            })
 
         setMobile('')
         setEmail('')
@@ -81,9 +83,11 @@ export default function SignupPage() {
         setTimeout(() => {
             if (status >= 200 && status <= 209) {
                 Navigate('/userprofile')
-            } else if (status >= 500 && status <= 599) (
+                localStorage.setItem('user', JSON.stringify(User))
+            } else if (status >= 500 && status <= 599) {
+
                 Navigate('/')
-            )
+            }
         }, 3000)
     }, [status, Navigate])
 
@@ -240,6 +244,7 @@ export default function SignupPage() {
             </div>
             {/* // page img */}
             <img src="./image/loginimg/loginpic.png" alt="" className="w-screen h-screen higherSM:w-[350px] lg:w-auto higherSM:mx-auto" />
+            <div></div>
         </>
     )
 }
