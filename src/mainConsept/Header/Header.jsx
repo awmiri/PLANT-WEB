@@ -44,7 +44,6 @@ export default function Header({ openMenu, setOpenMenu }) {
                     <h4 className='font-vazirMediom text-sm lg:text-base text-hightGreen group-hover:text-white hidden higherSM:inline'>ورود/ثبت نام</h4>
                 </Link>
             </div>
-
         </div>
     )
 }

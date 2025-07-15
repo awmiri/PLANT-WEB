@@ -21,11 +21,10 @@ function MainLayout() {
                 <Burgurmenu isOpen={openMenu} setOpenMenu={setOpenMenu} />
             </div>
             <section className='mt-16'>
-
                 <Outlet />
             </section>
         </div>
-    );
+    )
 }
 
 export default MainLayout;
