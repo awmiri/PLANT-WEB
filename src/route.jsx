@@ -3,11 +3,13 @@ import HomePage from './mainConsept/Body/TopBody';
 import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
 import NotFound from './mainConsept/404err/NotFound'
+import UserProfile from "./mainConsept/UserProfile/UserProfile";
 
 let allRout = [
     {
         path: '/', element: <MainLayout />, children: [
             { index: true, element: <HomePage /> },
+            { path: '/userprofile', element: <UserProfile /> },
             { path: '/*', element: <NotFound /> }
         ]
     },

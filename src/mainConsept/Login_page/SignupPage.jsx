@@ -1,5 +1,5 @@
 // import stats
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import LoginPage from './LoginPage'
 import { useNavigate } from 'react-router'
 import './login.css'
@@ -24,6 +24,8 @@ export default function SignupPage() {
     const [load, setLoad] = useState(false)
     // save user
     const [User, setUser] = useState()
+    // show sign up modal
+    const [status, setstatus] = useState(null)
     // use navigate hook for redirect us to the main menu
     const Navigate = useNavigate()
     // form submit event
@@ -59,7 +61,8 @@ export default function SignupPage() {
         })
             .then(res => {
                 setUser(newUser)
-                res.json()
+                console.log()
+                setstatus(res.status)
             })
             .then(data => console.log(data))
             .finally(() => setLoad(false))
@@ -71,6 +74,18 @@ export default function SignupPage() {
 
         // Navigate('/') // redirect to the main menu
     }
+
+    // navigate handler
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (status >= 200 && status <= 209) {
+                Navigate('/userprofile')
+            } else if (status >= 500 && status <= 599) (
+                Navigate('/')
+            )
+        }, 3000)
+    }, [status, Navigate])
 
     // change between sign in and login page
     const [goLoginPage, setgoLoginPage] = useState(false)
@@ -195,6 +210,34 @@ export default function SignupPage() {
                     {<LoginPage />}
                 </div >
             </div >
+            {/* // sign up modal */}
+            <div className='absolute top-5 right-5  '>
+                {
+                    status >= 200 && status <= 209 && (
+                        <div className='bg-emerald-700 text-white p-5'>
+                            <p>ثبت نام موفقیت امیز بود. :)</p>
+                        </div>
+
+                    )
+                }
+                {
+                    status >= 400 && status <= 499 && (
+                        <div className='bg-red-700 text-white p-5'>
+                            <p>ثبت نام موفقیت امیز نبود. :(</p>
+                        </div>
+
+                    )
+                }
+                {
+                    status >= 500 && status <= 599 && (
+                        <div className='bg-yellow-500 text-white p-5'>
+                            <p>خطا سرور بعدا امتحان کنید</p>
+                        </div>
+
+
+                    )
+                }
+            </div>
             {/* // page img */}
             <img src="./image/loginimg/loginpic.png" alt="" className="w-screen h-screen higherSM:w-[350px] lg:w-auto higherSM:mx-auto" />
         </>
