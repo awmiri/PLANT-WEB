@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router'
+import { data, Link } from 'react-router'
 import './UserProfile.css'
 
 export default function UserProfile() {
@@ -11,26 +11,62 @@ export default function UserProfile() {
     const [lastName, setLastName] = useState('')
     const [address, setaddress] = useState('')
     const [homenumber, sethomenumber] = useState('')
-    let user = JSON.parse(localStorage.getItem('user'))
-    console.log(user);
-
     const fileRef = useRef();
     const [image, setImage] = useState(null);
-    const handleUpload = (e) => {
+    let user = JSON.parse(localStorage.getItem('user'))
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+    };
+    const handleUpload = async (e) => {
 
         const file = e.target.files[0];
         if (!file) return;
         const url = URL.createObjectURL(file);
         console.log("✅ تصویر انتخاب شد:", url);
-        setImage(url);
+        const base64 = await convertToBase64(file);
+        setImage(base64);
+        console.log("✅ تصویر انتخاب شد:", base64);
+
     };
     const removeImage = () => {
         setImage(null);
         fileRef.current.value = null;
     };
-    const FormSubmitHandler = () => {
+    const FormSubmitHandler = (e) => {
+        e.preventDefault()
+        let updateUser = {
+            name: name,
+            lastname: lastName,
+            phonenumber: user.phonenumber,
+            password: user.Password,
+            address: address,
+            img: image,
+            homenumber: homenumber,
+            created_at: new Date().toISOString(),
+            email: user.email,
+            card: [],
+        }
+        const update = { ...user, ...updateUser }
+        localStorage.setItem('user', JSON.stringify(update))
+        console.log('sdfsdfsfds');
 
 
+        fetch(`https://xeybfyeppnzqsirbngwv.supabase.co/rest/v1/user?phonenumber=eq.${encodeURIComponent(user.phonenumber)}`, {
+            method: 'GET',
+            headers: {
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhleWJmeWVwcG56cXNpcmJuZ3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NjQwMzAsImV4cCI6MjA2ODA0MDAzMH0.Ej3w1QqhnR2XwmsTNhV59iDBKEFsz-Npzfg99-5paio',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhleWJmeWVwcG56cXNpcmJuZ3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NjQwMzAsImV4cCI6MjA2ODA0MDAzMH0.Ej3w1QqhnR2XwmsTNhV59iDBKEFsz-Npzfg99-5paio',
+                'Content-Type': 'application/json',
+                'Prefer': 'return=representation'
+            }
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
     };
 
 
@@ -41,22 +77,22 @@ export default function UserProfile() {
             <div className='p-6 flex flex-col justify-between h-dvh border-l-2 border-customgray2'>
                 <div className='flex flex-col gap-12'>
                     <div className='flex items-center gap-2'>
-                        <div className='rounded-full w-[60px] h-[60px] flex items-center justify-center'>
+                        <div className='rounded-full w-[60px] h-[60px] flex items-center justify-center overflow-hidden'>
                             {
-                                user ? (<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                user.img === '' ? (<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                 </svg>
-                                ) : (<img src={user.img} />)
+                                ) : (<img src={user.img} className='w-full h-full' />)
                             }
                         </div>
-                        <div>
-                            <span>{user.name + user.lastname}</span>
+                        <div className='flex flex-col'>
+                            <span className='text-nowrap'>{user.name} {user.lastname}</span>
                             <span className='font-vazirLight text-customgray3'>{user.phonenumber}</span>
                         </div>
                     </div>
                     <div>
                         <ul>
-                            <li className='flex items-center gap-2 py-3 px-[15px] active font-vazirMediom text-customgray4'>
+                            <li className='flex items-center gap-2 py-3 px-[15px] active font-vazirMediom text-customgray4 text-nowrap'>
                                 <span>
                                     <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
@@ -64,7 +100,7 @@ export default function UserProfile() {
                                 </span>
                                 مشخصات حساب کاربری
                             </li>
-                            <li className='flex items-center gap-2 py-3 px-[15px] font-vazirMediom text-customgray4'>
+                            <li className='flex items-center gap-2 py-3 px-[15px] font-vazirMediom text-customgray4 text-nowrap'>
                                 <span>
                                     <svg
                                         className="size-6" fill="currentColor" viewBox="0 0 24 24">
@@ -74,7 +110,7 @@ export default function UserProfile() {
                                 </span>
                                 مشاوره با گیاه پزشک
                             </li>
-                            <li className='flex items-center gap-2 py-3 px-[15px] font-vazirMediom text-customgray4'>
+                            <li className='flex items-center gap-2 py-3 px-[15px] font-vazirMediom text-customgray4 text-nowrap'>
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
@@ -95,8 +131,8 @@ export default function UserProfile() {
             </div>
             {/* profile main content */}
             <div className='mt-10 pr-6 w-full'>
-                <h2 className='mb-4'>مشخصات حساب کاربری</h2>
-                <form action="" onClick={FormSubmitHandler} className='border w-full p-6'>
+                <h2 className='mb-4 headers-before font-vazirBold   '>مشخصات حساب کاربری</h2>
+                <form action="" onSubmit={FormSubmitHandler} className='border border-customgray rounded-xl w-full p-6'>
                     <div className='flex items-center gap-4'>
                         <div className='w-20 h-20'>
                             {image ? (
@@ -191,7 +227,9 @@ export default function UserProfile() {
                                 <input type="tel" dir='rtl' className='w-full outline-0' onFocus={() => { setfocussHomenumber(true) }} onBlur={() => { if (homenumber.trim() === "") { setfocussHomenumber(false) } }} value={homenumber} onChange={(e) => sethomenumber(e.target.value)} />
                             </div>
                         </div>
-
+                    </div>
+                    <div className='w-full flex justify-end'>
+                        <button type='submit' className='bg-hightGreen text-white py-2 px-8 rounded-xl mt-8 '>ذخیره کردن</button>
                     </div>
                 </form>
             </div>

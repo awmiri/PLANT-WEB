@@ -3,3 +3,14 @@
   color: #417f56;
   border-radius: 8px;
 }
+.headers-before {
+  position: relative;
+}
+.headers-before::before {
+  content: " ";
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color: #417f56;
+  right: -10px;
+}

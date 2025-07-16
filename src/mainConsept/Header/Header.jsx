@@ -41,13 +41,13 @@ export default function Header({ openMenu, setOpenMenu }) {
                 </div>
                 {
                     user ? (<Link className='flex items-center gap-1' to={'/userprofile'}>
-                        <div>
+                        <div className='w-12 h-12 rounded-full overflow-hidden'>
                             {user.img === '' ? (<div className='rounded-full text-hightGreen'>
                                 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                 </svg>
                             </div>) : (
-                                <img src={user.img} />
+                                <img src={user.img} className='w-full h-full' />
                             )}
                         </div>
                         <p>سلام; {user.name}</p>
