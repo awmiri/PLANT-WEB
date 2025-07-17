@@ -21,7 +21,7 @@ export default function Header({ openMenu, setOpenMenu }) {
                         </svg>
 
                     </div>
-                    <a className='text-hightGreen font-bold text-xl lg:text-2xl font-vazirBold cursor-pointer'>گیاه لند</a>
+                    <Link to={'/'} className='text-hightGreen font-bold text-xl lg:text-2xl font-vazirBold cursor-pointer'>گیاه لند</Link>
                     <ul className='text-customBlack hidden sm:flex items-center gap-4 lg:gap-8 '>
                         <li className='font-vazirMediom text-sm lg:text-lg hover:text-hightGreen transition'>صفحه اصلی</li>
                         <li className='font-vazirMediom text-sm lg:text-lg hover:text-hightGreen transition'>گیاه پزشک</li>
