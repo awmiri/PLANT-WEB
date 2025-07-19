@@ -1,19 +1,29 @@
 import React, { useRef, useState } from 'react'
-import { data, Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import './UserProfile.css'
 
 export default function UserProfile() {
+    // add focuse anmate for btn 
     const [focusesName, setFocusesName] = useState(false)
     const [focusesLastName, setFocusesLastName] = useState(false)
     const [focussAddress, setfocussAddress] = useState(false)
     const [focussHomenumber, setfocussHomenumber] = useState(false)
+    // create empty state for use in input 
     const [name, setName] = useState('')
     const [lastName, setLastName] = useState('')
     const [address, setaddress] = useState('')
     const [homenumber, sethomenumber] = useState('')
+    // for add img
     const fileRef = useRef();
+    // add navigate state for redicect the user
+    const navigate = useNavigate();
+    // open and close the modal
+    const [modal, setmodal] = useState(false);
+    // save img state
     const [image, setImage] = useState(null);
+    // get user from the localstorage
     let user = JSON.parse(localStorage.getItem('user'))
+    // convert image for save in data base
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -22,6 +32,7 @@ export default function UserProfile() {
             reader.onerror = (error) => reject(error);
         });
     };
+    // img uplosde
     const handleUpload = async (e) => {
 
         const file = e.target.files[0];
@@ -33,10 +44,12 @@ export default function UserProfile() {
         console.log("✅ تصویر انتخاب شد:", base64);
 
     };
+    // remove img
     const removeImage = () => {
         setImage(null);
         fileRef.current.value = null;
     };
+    // form submit event fo send data in data base
     const FormSubmitHandler = (e) => {
         e.preventDefault()
         let updateUser = {
@@ -73,14 +86,32 @@ export default function UserProfile() {
         setaddress('')
         sethomenumber('')
     };
+    // logout the user from the web site
+    const LoginOutHandler = (e) => {
+        e.preventDefault()
+        localStorage.removeItem('user')
+        setmodal(true)
+        setTimeout(() => {
+            setmodal(false)
+            navigate('/loginpage')
+        }, 2000)
+    }
 
 
     return (
         // all content
-        <div className='flex -mt-16'>
+        <div className='flex -mt-16 relative'>
+            {/* //modal */}
+            <div className={`absolute -top-9 ${modal ? 'block' : 'hidden'} -right-5 bg-amber-400 p-6 text-white rounded-xl z-40`}>
+                <p>خروج از حساب با موفقیت انجام شد. به امید دیدار دوباره!</p>
+                <p className='text-center text-red-800'>برای ورود دوباره، به صفحه لاگین مراجعه کنید.</p>
+
+            </div>
             {/* // list profile */}
-            <div className='p-6 flex flex-col justify-between h-dvh border-l-2 border-customgray2'>
+            <div className='p-6 flex flex-col h-dvh border-l-2 border-customgray2'>
+                {/* // list profile content */}
                 <div className='flex flex-col gap-12'>
+                    {/* // list profile information */}
                     <div className='flex items-center gap-2'>
                         <div className='rounded-full w-[60px] h-[60px] flex items-center justify-center overflow-hidden'>
                             {
@@ -95,6 +126,7 @@ export default function UserProfile() {
                             <span className='font-vazirLight text-customgray3'>{user.phonenumber}</span>
                         </div>
                     </div>
+                    {/* // list profile work space */}
                     <div>
                         <ul>
                             <li className='flex items-center gap-2 py-3 px-[15px] active font-vazirMediom text-customgray4 text-nowrap'>
@@ -126,19 +158,23 @@ export default function UserProfile() {
                         </ul>
                     </div>
                 </div>
-                <Link className='flex items-center bg-customRedLight text-customRedBright p-3.5 rounded-lg text-nowrap'>
+                {/* logout btn */}
+                <button onClick={LoginOutHandler} className='mt-[300px] flex items-center bg-customRedLight text-customRedBright p-3.5 rounded-lg text-nowrap'>
                     <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
                     </svg>
                     </span>
                     خروج از حساب کاربری
-                </Link>
+                </button>
             </div>
             {/* profile main content */}
             <div className='mt-10 pr-6 w-full'>
-                <h2 className='mb-4 headers-before font-vazirBold   '>مشخصات حساب کاربری</h2>
+                {/* // complete the information title */}
+                <h2 className='mb-4 headers-before font-vazirBold'>مشخصات حساب کاربری</h2>
+                {/* // complete the information form*/}
                 <form action="" onSubmit={FormSubmitHandler} className='border border-customgray rounded-xl w-full p-6'>
                     <div className='flex items-center gap-4'>
+                        {/* // add img to the information */}
                         <div className='w-20 h-20'>
                             {image ? (
                                 <img src={image} className="w-20 h-20 rounded-full object-cover border" />) : (
@@ -149,6 +185,7 @@ export default function UserProfile() {
                             )
                             }
                         </div>
+                        {/* // complete img information btn */}
                         <div className='flex items-center gap-3'>
                             <button type='button' onClick={() => fileRef.current.click()} className="bg-hightGreen text-white px-4 py-2 rounded-xl">
                                 ویرایش با تصویر جدید
@@ -164,10 +201,12 @@ export default function UserProfile() {
                                 className="hidden"
                             />
                         </div>
-
                     </div>
+                    {/* // main complete information content */}
                     <div className='flex items-center w-full gap-6 flex-wrap mt-7'>
+                        {/* // complete information name & last name inputs */}
                         <div className='flex gap-6 w-full'>
+                            {/* // complete information name input */}
                             <div className={`border-2 ${!focusesName ? 'border-customgray3' : 'border-hightGreen'} rounded-xl flex relative gap-2 w-full py-3 px-3.5 text-customgray3 transition`}>
                                 {/* // mobile svg */}
                                 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`size-6 ${!focusesName ? 'text-customgray3' : 'text-hightGreen'} transition`}>
@@ -179,6 +218,7 @@ export default function UserProfile() {
                                 {/* // input number */}
                                 <input type="tel" dir='rtl' className='w-full outline-0' onFocus={() => { setFocusesName(true) }} onBlur={() => { if (name.trim() === "") { setFocusesName(false) } }} value={name} onChange={(e) => setName(e.target.value)} />
                             </div>
+                            {/* // complete information last name input */}
                             <div className={`border-2 ${!focusesLastName ? 'border-customgray3' : 'border-hightGreen'} rounded-xl flex relative gap-2 w-full py-3 px-3.5 text-customgray3 transition`}>
                                 {/* // mobile svg */}
                                 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`size-6 ${!focusesLastName ? 'text-customgray3' : 'text-hightGreen'} transition`}>
@@ -190,7 +230,9 @@ export default function UserProfile() {
                                 <input type="tel" dir='rtl' className='w-full outline-0' onFocus={() => { setFocusesLastName(true) }} onBlur={() => { if (lastName.trim() === "") { setFocusesLastName(false) } }} value={lastName} onChange={(e) => setLastName(e.target.value)} />
                             </div>
                         </div>
+                        {/* // complete information phone & email inputs */}
                         <div className='flex gap-6 w-full'>
+                            {/* // complete information phone inputs */}
                             <div className={`border-2  border-customgray3 rounded-xl flex relative gap-2 w-full py-3 px-3.5 text-customgray3 transition`}>
                                 {/* // mobile svg */}
                                 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`size-6 'text-customgray3 transition`}>
@@ -199,6 +241,7 @@ export default function UserProfile() {
                                 {/* // input number */}
                                 <input type="tel" dir='rtl' className='w-full outline-0' value={user.phonenumber} unselectable='on' />
                             </div>
+                            {/* // complete information email inputs */}
                             <div className={`border-2 border-customgray3 rounded-xl flex relative gap-2 w-full py-3 px-3.5 text-customgray3 transition`}>
                                 {/* // mobile svg */}
                                 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6 text-customgray3">
@@ -208,7 +251,9 @@ export default function UserProfile() {
                                 <input type="tel" dir='rtl' className='w-full outline-0' value={user.email} unselectable='on' />
                             </div>
                         </div>
+                        {/* // complete information adders & home tel inputs */}
                         <div className='flex gap-6 w-full'>
+                            {/* // complete information adders input */}
                             <div className={`border-2 ${!focussAddress ? 'border-customgray3' : 'border-hightGreen'} rounded-xl flex relative gap-2 w-full py-3 px-3.5 text-customgray3 transition`}>
                                 {/* // mobile svg */}
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className={`size-6 ${!focussAddress ? 'text-customgray3' : 'text-hightGreen'} transition`}>
@@ -219,6 +264,7 @@ export default function UserProfile() {
                                 {/* // input number */}
                                 <input type="tel" dir='rtl' className='w-full outline-0' onFocus={() => { setfocussAddress(true) }} onBlur={() => { if (address.trim() === "") { setfocussAddress(false) } }} value={address} onChange={(e) => setaddress(e.target.value)} />
                             </div>
+                            {/* // complete information home tel inputs */}
                             <div className={`border-2 ${!focussHomenumber ? 'border-customgray3' : 'border-hightGreen'} rounded-xl flex relative gap-2 w-full py-3 px-3.5 text-customgray3 transition`}>
                                 {/* // mobile svg */}
 
@@ -233,6 +279,7 @@ export default function UserProfile() {
                             </div>
                         </div>
                     </div>
+                    {/* // save changes btn */}
                     <div className='w-full flex justify-end'>
                         <button type='submit' className='bg-hightGreen text-white py-2 px-8 rounded-xl mt-8 '>ذخیره کردن</button>
                     </div>
