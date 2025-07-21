@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 
 
@@ -9,12 +10,89 @@ export default function LoginPage() {
     const [Mobile, setMobile] = useState("")
     const [GetPassword, setGetPassword] = useState("")
     const [showloginPassword, setShowloginPassword] = useState(false)
+    const [isPasswordCurrect, setisPasswordCurrect] = useState(false)
+    const [showErrPassword, setshowErrPassword] = useState(false)
+    const [wrongPhone, setwrongPhone] = useState(true)
+    const navigate = useNavigate()
+
+
+    const loginSubmitHandler = (e) => {
+        e.preventDefault()
+        setshowErrPassword(true)
+        fetch(`https://xeybfyeppnzqsirbngwv.supabase.co/rest/v1/user?phonenumber=eq.${encodeURIComponent(Mobile)}`, {
+            method: 'GET',
+            headers: {
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhleWJmeWVwcG56cXNpcmJuZ3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NjQwMzAsImV4cCI6MjA2ODA0MDAzMH0.Ej3w1QqhnR2XwmsTNhV59iDBKEFsz-Npzfg99-5paio',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhleWJmeWVwcG56cXNpcmJuZ3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NjQwMzAsImV4cCI6MjA2ODA0MDAzMH0.Ej3w1QqhnR2XwmsTNhV59iDBKEFsz-Npzfg99-5paio',
+                'Content-Type': 'application/json',
+                'Prefer': 'return=representation'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                const user = data[0]
+
+                if (!user) {
+
+                    setwrongPhone(false)
+                    setTimeout(() => {
+                        setshowErrPassword(false)
+                    }, 3000)
+                    return
+                }
+
+                setwrongPhone(true)
+
+                if (user.password !== GetPassword) {
+                    setisPasswordCurrect(false)
+                } else {
+                    setisPasswordCurrect(true)
+                    localStorage.setItem('user', JSON.stringify(user))
+                    setTimeout(() => {
+                        navigate('/')
+                    }, 2000)
+                }
+
+
+            })
+            .catch()
+            .finally(() => {
+                setTimeout(() => {
+                    setshowErrPassword(false);
+                }, 3000);
+            })
+        setMobile('')
+        setGetPassword('')
+    }
 
     return (
         <>
+            {/* // open Modal  */}
+            <div className={`absolute top-7 right-7 ${showErrPassword ? 'block' : 'hidden'}`}>
+                {/* // phone wrong number Modal  */}
+                {
+                    !wrongPhone && (
+                        <p className={`bg-red-700 p-6 rounded-xl text-white ${!wrongPhone ? 'block' : 'hidden'}`}>لطفا شماره تلقن خود را درست وارد کتید</p>
+                    )
+                }
+                {/* // Modal check password */}
+                {
+                    !isPasswordCurrect && wrongPhone && (
+                        <p className={`bg-red-700 p-6 rounded-xl text-white ${!isPasswordCurrect ? 'block' : 'hidden'}`}>لطقا پسورد خود را درست وارد کنید</p>
+                    )
+                }
+
+                {
+                    isPasswordCurrect && wrongPhone && (
+                        <p className={`bg-hightGreen p-6 rounded-xl text-white ${isPasswordCurrect ? 'block' : 'hidden'}`}>خوش امدید😎, ورود موفقیت امیز بود</p>
+                    )
+
+                }
+
+            </div>
             {/* // form title */}
             <h2 className='text-customBlack font-vazirBold  mb-6 higherSM:mb-8 text-xl'>ثبت نام</h2>
-            <form action="" className='w-full flex flex-col gap-4 higherSM:gap-6' >
+            <form action="" className='w-full flex flex-col gap-4 higherSM:gap-6' onSubmit={loginSubmitHandler}>
                 {/* // mobile number input section */}
                 <div className={`border-2 ${!focusesLoginMobile ? 'border-customgray3' : 'border-hightGreen'} rounded-xl flex relative gap-2 w-full py-3 px-3.5 text-customgray3 transition`}>
                     {/* // mobile svg */}
