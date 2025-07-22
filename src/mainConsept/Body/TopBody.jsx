@@ -1,8 +1,11 @@
 import React from 'react'
+import PlantItems from './PlantItems'
+import apartmentPlant from '../../product'
 
 export default function TopBody() {
+
     return (
-        <div>
+        <div className=''>
             <div className='flex-col-reverse sm:flex-row flex  items-center gap-14 md:justify-between'>
                 <div className='w-full sm:w-1/2 text-center sm:text-start'>
                     <h1 className='text-2xl bigXl:text-4xl font-vazirBold mb-8'>خرید راحت گیاه،با  <span className='text-hightGreen ' >گیاه لند! </span></h1>
@@ -75,6 +78,10 @@ export default function TopBody() {
                 <div className='w-full'><img src="./image/top img/f06c799844ffa2fb17f2e97106d9784c7e54b2e6.png" alt="" className='w-full h-[120px] lg:h-[240px] rounded-2xl ' /></div>
                 <div className='w-full'><img src="./image/top img/df2433d6727e1dce36be873e86ff246a350972d7.png" alt="" className='w-full h-[120px] lg:h-[240px] rounded-2xl ' /></div>
             </div>
+            {/* //apartment plant  */}
+            <section className='flex flex-col mt-12 '>
+                <PlantItems data={apartmentPlant} />
+            </section>
         </div>
 
     )

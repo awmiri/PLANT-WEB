@@ -1,0 +1,7 @@
+.scrollbar-hide::-webkit-scrollbar {
+  scroll-behavior: smooth;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE و Edge */
+  scrollbar-width: none; /* Firefox */
+}
