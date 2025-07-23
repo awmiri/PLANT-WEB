@@ -15,7 +15,7 @@ export default function PlantItems({ data }) {
                     data.map((item) => (
                         <div key={item.id} className='border border-customgray p-4 rounded-xl mt-6 min-w-[226px] md:min-w-[288px]'>
                             {/* item img */}
-                            <img src={item.img} alt="" />
+                            <img src={item.img[0]} alt="" />
                             {/* // item price */}
                             <div className='w-full'>
                                 <h3 className='mt-6 font-vazirMediom text-lg text-customBlack'>{item.name}</h3>

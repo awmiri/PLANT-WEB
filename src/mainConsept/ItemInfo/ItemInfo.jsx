@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import apartmentPlant from '../../product';
 
@@ -9,6 +9,7 @@ export default function ItemInfo() {
     let allPlant = [...apartmentPlant]
     let findCategory = allPlant.filter((item) => item.categoriEn === category)
     let getSpeshialItem = findCategory.find(item => item.id === +id)
+    let [img, setImg] = useState(getSpeshialItem.img[0])
 
 
     return (
@@ -19,8 +20,15 @@ export default function ItemInfo() {
                 </svg>خانه <span className='text-customgray3'>&gt;</span> {getSpeshialItem.categoriFn} <span className='text-customgray3'>&gt;</span> <span className='text-customgray3'>{getSpeshialItem.name}</span>
             </p>
             <div className='flex items-center gap-20 mt-20'>
-                <div className='w-[430px] h-[460px] flex items-center justify-center'>
-                    <img src={getSpeshialItem.img} alt="" />
+                <div className='w-[430px] h-[460px] flex flex-col items-center justify-center'>
+                    <img src={img} alt="" />
+                    <div className='flex gap-3 mt-10'>
+                        {getSpeshialItem.img.map((item) => (
+                            <div className='border border-customgray5 w-[100px] h-[100px] p-2.5 flex items-center justify-center rounded-md'>
+                                <img src={item} alt="" />
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className='flex flex-col items-start w-[438px]'>
                     <p className='text-hightGreen font-vazirMediom'>{getSpeshialItem.categoriFn}</p>
