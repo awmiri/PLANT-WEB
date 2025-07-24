@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router';
 import useUserLogin from '../../userLogin';
-import UserBasket from '../../basket';
+import getUserBasket from '../../basket';
+
 
 export default function ShoppingCart() {
     const userLogin = useUserLogin()
+    const [basket, setBasket] = useState([])
+
+    useEffect(() => {
+        const UserBasket = getUserBasket()
+        setBasket(UserBasket)
+
+    }, [])
 
     return (
         <>
@@ -30,7 +38,7 @@ export default function ShoppingCart() {
 
                     </div>
                 ) : (
-                    UserBasket.length === 0 ? (
+                    basket.length === 0 ? (
                         <div className='flex flex-col items-center justify-center mt-20'>
                             <img src="image/basket/Group.png" alt="" />
                             <div className='flex flex-col items-center mt-10 text-center'>

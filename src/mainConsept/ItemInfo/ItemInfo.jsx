@@ -1,20 +1,43 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import apartmentPlant from '../../product';
-import useUserLogin from '../../userLogin';
+import UserBasket from '../../basket';
+import UserLogin from '../../userLogin';
 
 export default function ItemInfo() {
     let { category, id } = useParams()
+
     console.log(category);
     console.log(id);
     let allPlant = [...apartmentPlant]
     let findCategory = allPlant.filter((item) => item.categoriEn === category)
     let getSpeshialItem = findCategory.find(item => item.id === +id)
     let [img, setImg] = useState(getSpeshialItem.img[0])
-    const userLogin = useUserLogin()
-    let addCartHandler = () => {
-        userLogin(prev => ([...prev, getSpeshialItem]))
 
+
+
+    let addCartHandler = () => {
+        let getUser = JSON.parse(localStorage.getItem('user'))
+        let isExsist = getUser.card.some(item => item.id === getSpeshialItem.id)
+
+        if (isExsist) {
+            console.log('اشتباه');
+        } else {
+            getUser.card.push(getSpeshialItem)
+            localStorage.setItem('user', JSON.stringify(getUser))
+            fetch(`https://xeybfyeppnzqsirbngwv.supabase.co/rest/v1/user?phonenumber=eq.${encodeURIComponent(getUser.phonenumber)}`, {
+                method: 'PATCH',
+                headers: {
+                    'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhleWJmeWVwcG56cXNpcmJuZ3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NjQwMzAsImV4cCI6MjA2ODA0MDAzMH0.Ej3w1QqhnR2XwmsTNhV59iDBKEFsz-Npzfg99-5paio',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhleWJmeWVwcG56cXNpcmJuZ3d2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI0NjQwMzAsImV4cCI6MjA2ODA0MDAzMH0.Ej3w1QqhnR2XwmsTNhV59iDBKEFsz-Npzfg99-5paio',
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=representation'
+                },
+                body: JSON.stringify({
+                    card: getUser.card
+                })
+            }).then(res => res.json())
+        }
     }
 
 
@@ -97,7 +120,7 @@ export default function ItemInfo() {
                         <span className='text-sm font-vazirMediom text-customBlack'>قیمت:</span>
                         <span className='text-customBlack font-vazirMediom'>{getSpeshialItem.price.toLocaleString('fa-IR')} تومان</span>
                     </div>
-                    <button className={`${!userLogin ? 'bg-customgray5' : 'bg-hightGreen'} text-white w-full p-2 rounded-xl font-vazirMediom text-lg`} disabled={!userLogin} onClick={addCartHandler}>افزودن به سبد خرید</button>
+                    <button className={`${!UserLogin ? 'bg-customgray5' : 'bg-hightGreen'} text-white w-full p-2 rounded-xl font-vazirMediom text-lg`} disabled={!UserLogin} onClick={addCartHandler}>افزودن به سبد خرید</button>
                 </div>
             </div>
         </>
