@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import apartmentPlant from '../../product';
+import useUserLogin from '../../userLogin';
 
 export default function ItemInfo() {
     let { category, id } = useParams()
@@ -10,6 +11,11 @@ export default function ItemInfo() {
     let findCategory = allPlant.filter((item) => item.categoriEn === category)
     let getSpeshialItem = findCategory.find(item => item.id === +id)
     let [img, setImg] = useState(getSpeshialItem.img[0])
+    const userLogin = useUserLogin()
+    let addCartHandler = () => {
+        userLogin(prev => ([...prev, getSpeshialItem]))
+
+    }
 
 
     return (
@@ -21,11 +27,20 @@ export default function ItemInfo() {
             </p>
             <div className='flex items-center gap-20 mt-20'>
                 <div className='w-[430px] h-[460px] flex flex-col items-center justify-center'>
-                    <img src={img} alt="" />
+                    <img src={img} alt="" className='w-[430px] h-[460px] object-contain' />
                     <div className='flex gap-3 mt-10'>
-                        {getSpeshialItem.img.map((item) => (
-                            <div className='border border-customgray5 w-[100px] h-[100px] p-2.5 flex items-center justify-center rounded-md'>
-                                <img src={item} alt="" />
+                        {getSpeshialItem.img.map((item, index) => (
+                            <div key={index} onClick={() => setImg(item)} className={`border border-customgray5 w-[100px] h-[100px] p-2.5 flex items-center justify-center rounded-md relative ${item === img ? 'bg-[#FFFFFFB2]  z-auto' : ''} transition`}>
+                                <img src={item} alt="" className={`${item === img ? '-z-10 blur-[1px]' : ''}  w-[80px] h-[80px] transition`} />
+                                <div className='text-black z-[1000]'>
+                                    {
+                                        item === img && (
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6 absolute m-auto right-0 left-0 top-0 bottom-0">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
+                                        )
+                                    }
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -82,7 +97,7 @@ export default function ItemInfo() {
                         <span className='text-sm font-vazirMediom text-customBlack'>قیمت:</span>
                         <span className='text-customBlack font-vazirMediom'>{getSpeshialItem.price.toLocaleString('fa-IR')} تومان</span>
                     </div>
-                    <button className='bg-hightGreen text-white w-full p-2 rounded-xl font-vazirMediom text-lg'>افزودن به سبد خرید</button>
+                    <button className={`${!userLogin ? 'bg-customgray5' : 'bg-hightGreen'} text-white w-full p-2 rounded-xl font-vazirMediom text-lg`} disabled={!userLogin} onClick={addCartHandler}>افزودن به سبد خرید</button>
                 </div>
             </div>
         </>

@@ -8,7 +8,7 @@ try {
 
 let UserBasket = []
 if (getUser) {
-
+    UserBasket = getUser.card
     getUser.card = UserBasket
 
     localStorage.setItem('user', JSON.stringify(getUser))
