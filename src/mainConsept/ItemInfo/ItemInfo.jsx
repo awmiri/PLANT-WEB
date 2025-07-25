@@ -13,6 +13,7 @@ export default function ItemInfo() {
     let findCategory = allPlant.filter((item) => item.categoriEn === category)
     let getSpeshialItem = findCategory.find(item => item.id === +id)
     let [img, setImg] = useState(getSpeshialItem.img[0])
+    let [showMore, setShowMore] = useState(false)
 
 
 
@@ -43,22 +44,22 @@ export default function ItemInfo() {
 
     return (
         <>
-            <p className='flex items-center gap-1.5 text-hightGreen font-vazirMediom text-sm sm:text-lg -mt-6'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <p className='flex items-center gap-1.5 text-hightGreen font-vazirMediom text-sm md:text-lg -mt-6'>
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>خانه <span className='text-customgray3'>&gt;</span> {getSpeshialItem.categoriFn} <span className='text-customgray3'>&gt;</span> <span className='text-customgray3'>{getSpeshialItem.name}</span>
             </p>
-            <div className='flex items-center gap-20 mt-20'>
-                <div className='w-[430px] h-[460px] flex flex-col items-center justify-center'>
+            <div className='flex items-center flex-col md:flex-row gap-10 higherLg:gap-20 mt-20'>
+                <div className='w-[290px] md:w-[430px] h-[290px] md:h-[460px] flex flex-col items-center justify-center mt-10'>
                     <img src={img} alt="" className='w-[430px] h-[460px] object-contain' />
-                    <div className='flex gap-3 mt-10'>
+                    <div className='smallerSM:flex hidden gap-3 mt-5'>
                         {getSpeshialItem.img.map((item, index) => (
                             <div key={index} onClick={() => setImg(item)} className={`border border-customgray5 w-[100px] h-[100px] p-2.5 flex items-center justify-center rounded-md relative ${item === img ? 'bg-[#FFFFFFB2]  z-auto' : ''} transition`}>
                                 <img src={item} alt="" className={`${item === img ? '-z-10 blur-[1px]' : ''}  w-[80px] h-[80px] transition`} />
                                 <div className='text-black z-[1000]'>
                                     {
                                         item === img && (
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6 absolute m-auto right-0 left-0 top-0 bottom-0">
+                                            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6 absolute m-auto right-0 left-0 top-0 bottom-0">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                             </svg>
                                         )
@@ -68,36 +69,42 @@ export default function ItemInfo() {
                         ))}
                     </div>
                 </div>
-                <div className='flex flex-col items-start w-[438px]'>
-                    <p className='text-hightGreen font-vazirMediom'>{getSpeshialItem.categoriFn}</p>
-                    <h3 className='text-customBlack2 font-vazirBold text-lg mb-3'>{getSpeshialItem.name}</h3>
-                    <div className='border-t border-t-customgray5 w-full '>
-                        <h2 className='font-vazirBold mt-3 mb-2'>ویژگی ها</h2>
+                <div className='flex flex-col smallerSM:items-start items-center w-full smallerSM:w-[438px] -mt-10 smallerSM:mt-16 md:mt-0'>
+                    <p className='text-hightGreen font-vazirMediom text-sm md:text-base hidden smallerSM:block'>{getSpeshialItem.categoriFn}</p>
+                    <h3 className='text-customBlack2 font-vazirBold text-base md:text-lg mb-3'>{getSpeshialItem.name}</h3>
+                    <div className='smallerSM:border-t border-t-customgray5 w-full flex  gap-4 smallerSM:block'>
+                        <h2 className='font-vazirBold mt-3 mb-2 hidden smallerSM:block'>ویژگی ها</h2>
                         <div className='flex flex-wrap gap-6'>
-                            <div className='bg-customgray2 py-1.5 px-3 w-[200px] rounded-md'>
+                            <div className='bg-customgray2 py-1.5 px-3 smallerSM:w-[200px] rounded-md'>
                                 <h3 className='font-vazirMediom text-sm'>جنس گلدان</h3>
                                 <p className='font-vazirLight te'>{getSpeshialItem.property.vaseMt}</p>
                             </div>
-                            <div className='bg-customgray2 py-1.5 px-3 w-[200px] rounded-md'>
+                            <div className={`bg-customgray2 py-1.5 px-3 smallerSM:w-[200px] rounded-md ${showMore ? 'block' : 'hidden'} smallerSM:block`}>
                                 <h3 className='font-vazirMediom text-sm'>خاک گیاه</h3>
                                 <p className='font-vazirLight te'>{getSpeshialItem.property.sol}</p>
                             </div>
-                            <div className='bg-customgray2 py-1.5 px-3 w-[200px] rounded-md'>
+                            <div className='bg-customgray2 py-1.5 px-3 smallerSM:w-[200px] rounded-md'>
                                 <h3 className='font-vazirMediom text-sm'>وزن</h3>
                                 <p className='font-vazirLight te'>{getSpeshialItem.property.wight}</p>
                             </div>
-                            <div className='bg-customgray2 py-1.5 px-3 w-[200px] rounded-md'>
+                            <div className={`bg-customgray2 py-1.5 px-3 smallerSM:w-[200px] rounded-md ${showMore ? 'block' : 'hidden'} smallerSM:block`}>
                                 <h3 className='font-vazirMediom text-sm'>ابعاد</h3>
                                 <p className='font-vazirLight te'>{getSpeshialItem.property.size}</p>
                             </div>
-                            <div className='bg-customgray2 py-1.5 px-3 w-[200px] rounded-md'>
+                            <div className={`bg-customgray2 py-1.5 px-3 smallerSM:w-[200px] rounded-md ${showMore ? 'block' : 'hidden'} smallerSM:block`}>
                                 <h3 className='font-vazirMediom text-sm'>وضعیت نسبت به آفتاب</h3>
                                 <p className='font-vazirLight te'>{getSpeshialItem.property.sunLike}</p>
                             </div>
+                            <div className='smallerSM:hidden'>
+                                <button className='border-2 text-hightGreen border-hightGreen rounded-xl px-1 smallerSM:px-4 py-2' onClick={() => { setShowMore(prev => (!prev)) }}>مشاهده همه ویژگی ها</button>
+                            </div>
+                        </div>
+                        <div className='hidden smallerSM:w-full smallerSM:flex smallerSM:justify-center smallerSM:mt-10'>
+                            <button className='border-2 text-hightGreen border-hightGreen rounded-xl px-1 smallerSM:px-4 py-2' onClick={() => { setShowMore(prev => (!prev)) }}>مشاهده همه ویژگی ها</button>
                         </div>
                     </div>
                 </div>
-                <div className='px-6 py-8 border border-customgray5 rounded-2xl w-[312px] text-customBlack2'>
+                <div className='px-6 py-8 border-t border-b smallerSM:border border-customgray5 smallerSM:rounded-2xl w-full smallerSM:w-[312px] text-customBlack2'>
                     <div className='border-b border-b-customgray5'>
                         <p className='mb-6 font-vazirMediom'>فروشنده</p>
                         <div className='flex'>
