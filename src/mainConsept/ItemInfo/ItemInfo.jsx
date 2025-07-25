@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router'
+import React, { useState, useEffect } from 'react'
+import { useParams, Link } from 'react-router'
 import apartmentPlant from '../../product';
 import UserBasket from '../../basket';
 import UserLogin from '../../userLogin';
@@ -13,8 +13,13 @@ export default function ItemInfo() {
     let findCategory = allPlant.filter((item) => item.categoriEn === category)
     // find the special item in category 
     let getSpeshialItem = findCategory.find(item => item.id === +id)
+    // find similar item
+    let moreItem = findCategory.filter(item => (item.id !== +id))
     // get the imge for chang the img web 
     let [img, setImg] = useState(getSpeshialItem.img[0])
+    useEffect(() => {
+        setImg(getSpeshialItem.img[0]);
+    }, [getSpeshialItem])
     // for show more information
     let [showMore, setShowMore] = useState(false)
     // for show modal
@@ -26,7 +31,7 @@ export default function ItemInfo() {
         let getUser = JSON.parse(localStorage.getItem('user'))
         // search for find the item is add is exist or not 
         let isExsist = getUser.card.some(item => item.id === getSpeshialItem.id)
-        // if exist show modal
+        // if exist show modal 
         if (isExsist) {
             setShowModal(true)
             setTimeout(() => {
@@ -159,6 +164,30 @@ export default function ItemInfo() {
                     </div>
                     {/* // add to the user basket btn */}
                     <button className={`${!UserLogin ? 'bg-customgray5' : 'bg-hightGreen'} text-white w-full p-2 rounded-xl font-vazirMediom text-lg`} disabled={!UserLogin} onClick={addCartHandler}>افزودن به سبد خرید</button>
+                </div>
+            </div>
+            <div className='mt-20'>
+                <h3 className='text-customBlack text-xl font-vazirMediom'>گیاه های مشابه </h3>
+                <div className='flex items-center justify-between gap-4 md:gap-6 shrink-0 overflow-x-auto scrollbar-hide mb-36 relative'>
+                    {
+                        moreItem.map((item) => (
+                            <div key={item.id} className='border border-customgray p-4 rounded-xl mt-6 min-w-[226px] md:min-w-[288px]'>
+                                {/* item img */}
+                                <img src={item.img[0]} alt="" />
+                                {/* // item price */}
+                                <div className='w-full'>
+                                    <h3 className='mt-6 font-vazirMediom text-lg text-customBlack'>{item.name}</h3>
+                                    <div className='flex items-center justify-between mt-2.5'>
+                                        <span className='text-sm font-vazirMediom text-customBlack'>قیمت:</span>
+                                        <span className='text-customBlack font-vazirMediom'>{item.price.toLocaleString('fa-IR')} تومان</span>
+                                    </div>
+                                    {/* show information btn */}
+                                    <Link to={`/iteminfo/${item.categoriEn}/${item.id}`} className='bg-hightGreen block rounded-lg mt-5 text-center text-white p-2 w-full'>مشاهده  بیشتر</Link>
+                                </div>
+                            </div>
+                        ))
+                    }
+
                 </div>
             </div>
         </>
