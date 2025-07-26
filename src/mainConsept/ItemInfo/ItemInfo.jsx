@@ -171,7 +171,7 @@ export default function ItemInfo() {
                 <div className='flex items-center justify-between gap-4 md:gap-6 shrink-0 overflow-x-auto scrollbar-hide mb-36 relative'>
                     {
                         moreItem.map((item) => (
-                            <div key={item.id} className='border border-customgray p-4 rounded-xl mt-6 min-w-[226px] md:min-w-[288px]'>
+                            <div key={item.id} className=' mb-12 border border-customgray p-4 rounded-xl mt-6 min-w-[226px] md:min-w-[288px]'>
                                 {/* item img */}
                                 <img src={item.img[0]} alt="" />
                                 {/* // item price */}

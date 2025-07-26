@@ -31,11 +31,14 @@ html {
   --color-lightGreen: #e5f2e9;
   --color-customBlack: #121212;
   --color-customBlack2: #212121;
+  --color-customBlack3: #353535;
   --color-customgray: #d9d9d9;
   --color-customgray2: #efefef;
   --color-customgray3: #717171;
   --color-customgray4: #505050;
   --color-customgray5: #adadad;
+  --color-customgray6: #cbcbcb;
+  --color-customgray7: #909090;
   --color-customRedLight: #fff2f2;
   --color-customRedBright: #ed2e2e;
   --font-vazirBold: "vazirBold";
