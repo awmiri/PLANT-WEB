@@ -86,9 +86,9 @@ export default function TopBody() {
             <section className='flex flex-col mt-12 '>
                 <PlantItems data={apartmentPlant} />
             </section>
-            {/* //apartment plant  */}
-            <section className='flex flex-col mt-12 '>
-                <MoreItem date={apartmentPlantTips} />
+            {/* //apartment plant  category */}
+            <section className=''>
+                <MoreItem data={apartmentPlantTips} />
             </section>
         </div >
 

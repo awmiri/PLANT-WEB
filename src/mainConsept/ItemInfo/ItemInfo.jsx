@@ -5,6 +5,8 @@ import UserBasket from '../../basket';
 import UserLogin from '../../userLogin';
 
 export default function ItemInfo() {
+    console.log(apartmentPlantTips);
+
     // get the category & id from the url
     let { category, id } = useParams()
     // add the alls product 
@@ -173,7 +175,7 @@ export default function ItemInfo() {
                         moreItem.map((item) => (
                             <div key={item.id} className=' mb-12 border border-customgray p-4 rounded-xl mt-6 min-w-[226px] md:min-w-[288px]'>
                                 {/* item img */}
-                                <img src={item.img[0]} alt="" />
+                                <img src={item.img[0]} alt="" className='w-full h-[261px] rounded-lg' />
                                 {/* // item price */}
                                 <div className='w-full'>
                                     <h3 className='mt-6 font-vazirMediom text-lg text-customBlack'>{item.name}</h3>

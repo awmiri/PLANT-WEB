@@ -29,7 +29,7 @@ function MainLayout() {
 
                 </div>
             </main>
-            <footer className='bg-[#F6F6F6]'>
+            <footer className='bg-[#F6F6F6] mt-20'>
                 <div className='mx-[16px] sm:mx-[50px] lg:mx-[108px]'>
                     <Footer />
                 </div>
