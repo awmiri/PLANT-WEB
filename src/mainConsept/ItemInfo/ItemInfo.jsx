@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router'
-import apartmentPlant from '../../product';
+import { apartmentPlant, apartmentPlantTips } from '../../product.js'
 import UserBasket from '../../basket';
 import UserLogin from '../../userLogin';
 
@@ -8,7 +8,7 @@ export default function ItemInfo() {
     // get the category & id from the url
     let { category, id } = useParams()
     // add the alls product 
-    let allPlant = [...apartmentPlant]
+    let allPlant = [...apartmentPlant, ...apartmentPlantTips]
     // find the special category from the other 
     let findCategory = allPlant.filter((item) => item.categoriEn === category)
     // find the special item in category 

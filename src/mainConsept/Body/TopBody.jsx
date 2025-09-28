@@ -1,8 +1,12 @@
 import React from 'react'
 import PlantItems from './PlantItems'
-import apartmentPlant from '../../product'
+import { apartmentPlant, apartmentPlantTips } from '../../product.js'
+import MoreItem from '../MoreItem/MoreItem'
 
 export default function TopBody() {
+    console.log(apartmentPlant);
+    console.log(apartmentPlantTips);
+
 
     return (
         <div className=''>
@@ -82,7 +86,11 @@ export default function TopBody() {
             <section className='flex flex-col mt-12 '>
                 <PlantItems data={apartmentPlant} />
             </section>
-        </div>
+            {/* //apartment plant  */}
+            <section className='flex flex-col mt-12 '>
+                <MoreItem date={apartmentPlantTips} />
+            </section>
+        </div >
 
     )
 }
