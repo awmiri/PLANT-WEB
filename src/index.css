@@ -44,8 +44,8 @@ html {
   --font-vazirBold: "vazirBold";
   --font-vazirMediom: "vazirMediom";
   --font-vazirLight: "vazirLight";
-  --breakpoint-smallerSM: 37.5rem;
-  --breakpoint-higherSM: 43.75rem;
-  --breakpoint-higherLg: 671.75rem;
-  --breakpoint-bigXl: 84.375rem;
+  --breakpoint-smallerSM: 37.5rem; /*600*/
+  --breakpoint-higherSM: 43.75rem; /*700*/
+  --breakpoint-higherLg: 671.75rem; /*600*/
+  --breakpoint-bigXl: 84.375rem; /*600*/
 }
