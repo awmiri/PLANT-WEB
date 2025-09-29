@@ -1,6 +1,6 @@
 import React from 'react'
 import PlantItems from './PlantItems'
-import { apartmentPlant, apartmentPlantTips, service, decoratePlant, decorationPlantTips } from '../../product.js'
+import { apartmentPlant, apartmentPlantTips, service, decoratePlant, decorationPlantTips, giftPlanet } from '../../product.js'
 import MoreItem from '../MoreItem/MoreItem'
 import OurService from '../ourService/OurService.jsx'
 
@@ -98,6 +98,10 @@ export default function TopBody() {
             {/* //decoration plant category */}
             <section className=''>
                 <MoreItem data={decorationPlantTips} />
+                {/* //gift plant  */}
+                <section className='flex flex-col mt-12 '>
+                    <PlantItems data={giftPlanet} />
+                </section>
             </section>
         </div >
 

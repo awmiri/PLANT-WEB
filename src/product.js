@@ -32,6 +32,12 @@ let decorationPlantTips = [
     { id: 3, name: 'گیاه آشیانتوس', price: 560_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decorationPlantTips', performance: 2.3, property: { vaseMt: 'سرامیک', sol: "خاک گلدانی شنی و غنی", wight: 5000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "حساس به افتاب" }, sender: "گاردن شاپ", img: ['/image/decoration-category/item-3.png'], cunt: 1 },
     { id: 4, name: 'گیاه آناناسی', price: 2_700_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decorationPlantTips', performance: 3.6, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 3000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "سبزوار شاپ", img: ['/image/decoration-category/item-4.png'], cunt: 1 }
 ]
+let giftPlanet = [
+    { id: 1, name: 'بنت قنسول گلیتال', price: 176_000, categoriFn: "گیاهان کادویی", categoriEn: 'giftPlanet', performance: 4.5, property: { vaseMt: 'چوبی', sol: 'خاک گلدانی شنی و غنی', wight: 4000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "فلاور گاردن", img: ['/image/gift-flower/item-1.png'], cunt: 1 },
+    { id: 2, name: 'گیاه طبیعی آنتوریوم ', price: 459_000, categoriFn: "گیاهان کادویی", categoriEn: 'giftPlanet', performance: 1.5, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 1000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "حساس به افتاب" }, sender: "فتون", img: ['/image/gift-flower/item-2.png'], cunt: 1 },
+    { id: 3, name: 'گیاه طبیعی بونسای پاچیرا', price: 880_000, categoriFn: "گیاهان کادویی", categoriEn: 'giftPlanet', performance: 2.3, property: { vaseMt: 'سرامیک', sol: "خاک گلدانی شنی و غنی", wight: 5000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "حساس به افتاب" }, sender: "گاردن شاپ", img: ['/image/gift-flower/item-3.png'], cunt: 1 },
+    { id: 4, name: 'گیاه طبیعی آنتوریوم', price: 498_000, categoriFn: "گیاهان کادویی", categoriEn: 'giftPlanet', performance: 3.6, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 3000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "سبزوار شاپ", img: ['/image/gift-flower/item-4.png'], cunt: 1 }
+]
 
 
 
@@ -51,4 +57,4 @@ let decorationPlantTips = [
 
 
 
-export { apartmentPlant, apartmentPlantTips, service, decoratePlant, decorationPlantTips } 
+export { apartmentPlant, apartmentPlantTips, service, decoratePlant, decorationPlantTips, giftPlanet } 
