@@ -11,10 +11,14 @@ let apartmentPlantTips = [
     { id: 4, name: 'گیاه پاچیرا', price: 2_700_000, categoriFn: "گیاهان آپارتمانی", categoriEn: 'apartmentPlantTip', performance: 3.6, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 3000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "سبزوار شاپ", img: ['/image/category-img/cat_1_4.png'], cunt: 1 }
 ]
 let service = [
-    { id: 1, name: 'گیاه بونسای', price: 1_000_000, categoriFn: "گیاهان آپارتمانی", categoriEn: 'apartmentPlantTip', performance: 4.5, property: { vaseMt: 'چوبی', sol: 'خاک گلدانی شنی و غنی', wight: 4000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "فلاور گاردن", img: ['/image/category-img/cat_1_1.png'], cunt: 1 },
-    { id: 2, name: 'گیاه طبیعی سانسوریا ', price: 250_000, categoriFn: "گیاهان آپارتمانی", categoriEn: 'apartmentPlantTip', performance: 1.5, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 1000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "حساس به افتاب" }, sender: "فتون", img: ['/image/category-img/cat_1_2.png'], cunt: 1 },
-    { id: 3, name: 'گیاه پتوس', price: 560_000, categoriFn: "گیاهان آپارتمانی", categoriEn: 'apartmentPlantTip', performance: 2.3, property: { vaseMt: 'سرامیک', sol: "خاک گلدانی شنی و غنی", wight: 5000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "حساس به افتاب" }, sender: "گاردن شاپ", img: ['/image/category-img/cat_1_3.png'], cunt: 1 },
-    { id: 4, name: 'گیاه پاچیرا', price: 2_700_000, categoriFn: "گیاهان آپارتمانی", categoriEn: 'apartmentPlantTip', performance: 3.6, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 3000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "سبزوار شاپ", img: ['/image/category-img/cat_1_4.png'], cunt: 1 }
+    { id: 1, title: "چک کردن اسید خاک", content: "با استفاده از ابزار مخصوص اسید خاک گیاه چک میشود", img: "/image/page icon/1.svg" },
+    { id: 2, title: "برسی مواد معدنی خاک", content: "یکی از موارد مهم خاک، مقدار مواد معدنی آن است که با دقت برسی میشود", img: "/image/page icon/2.svg" },
+    { id: 3, title: "مشاهده بهترین دما", content: "از موارد مهم برای گیاه مقدار دمای محیط است که باید اندازه گیری شود", img: "/image/page icon/3.svg" },
+    { id: 4, title: "برسی آسیب های احتمالی", content: "تمامی آسیب های احتمالی برسی میگردد تا از وقوع مشکلات آینده جلوگیری شود", img: "/image/page icon/4.svg" },
+    { id: 5, title: "از بین بردن عناصر آلوده خاک", content: "ظاهر گیاه بیانگر مسائل مهمی هست.میتوان با مشاهده ظاهر گیاه آفات و ... را متوجه شد", img: "/image/page icon/5.svg" },
+    { id: 6, title: "برسی ظاهر", content: "ظاهر گیاه بیانگر مسائل مهمی هست.میتوان با مشاهده ظاهر گیاه آفات و ... را متوجه شد", img: "/image/page icon/6.svg" },
+    { id: 7, title: "اندازه گیری EC ", content: "این اندازه گیری نشانی از مقدار کل مواد مغذی موجود برای گیاهان می‌دهد", img: "/image/page icon/7.svg" },
+    { id: 8, title: "ارائه مکمل ", content: "برای رشد بهتر گیاهان و رفع آفات از مکمل ها میتوان استفاده کرد", img: "/image/page icon/8.svg" },
 ]
 
 
@@ -35,4 +39,4 @@ let service = [
 
 
 
-export { apartmentPlant, apartmentPlantTips } 
+export { apartmentPlant, apartmentPlantTips, service } 

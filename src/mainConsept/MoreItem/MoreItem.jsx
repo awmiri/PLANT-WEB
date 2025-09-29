@@ -8,7 +8,7 @@ export default function MoreItem({ data }) {
         <div className='flex items-center justify-between flex-nowrap gap-6 overflow-x-scroll  xl:overscroll-none'>
             {
                 data.map((item) => (
-                    <div className='min-w-[280px] h-[240px]  relative rounded-[8px] overflow-hidden'>
+                    <div key={item.id} className='min-w-[280px] h-[240px]  relative rounded-[8px] overflow-hidden'>
                         <img src={item.img[0]} alt="" className='w-[280px] h-[240px]' />
                         <div className='bg-black/50 absolute z-10 w-full h-full top-0'></div>
                         <div className='absolute top-[150px] right-2 xl:right-5 z-50'>
