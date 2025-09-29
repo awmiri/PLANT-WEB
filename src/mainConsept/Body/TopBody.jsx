@@ -2,12 +2,9 @@ import React from 'react'
 import PlantItems from './PlantItems'
 import { apartmentPlant, apartmentPlantTips } from '../../product.js'
 import MoreItem from '../MoreItem/MoreItem'
+import OurService from '../ourService/OurService.jsx'
 
 export default function TopBody() {
-    console.log(apartmentPlant);
-    console.log(apartmentPlantTips);
-
-
     return (
         <div className=''>
             <div className='flex-col-reverse sm:flex-row flex  items-center gap-14 md:justify-between'>
@@ -89,6 +86,9 @@ export default function TopBody() {
             {/* //apartment plant  category */}
             <section className=''>
                 <MoreItem data={apartmentPlantTips} />
+            </section>
+            <section className=''>
+                <OurService />
             </section>
         </div >
 

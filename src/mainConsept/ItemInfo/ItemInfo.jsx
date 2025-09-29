@@ -3,10 +3,9 @@ import { useParams, Link } from 'react-router'
 import { apartmentPlant, apartmentPlantTips } from '../../product.js'
 import UserBasket from '../../basket';
 import UserLogin from '../../userLogin';
+import { motion } from 'framer-motion';
 
 export default function ItemInfo() {
-    console.log(apartmentPlantTips);
-
     // get the category & id from the url
     let { category, id } = useParams()
     // add the alls product 
@@ -61,7 +60,7 @@ export default function ItemInfo() {
 
 
     return (
-        <>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, ease: 'easeIn' }}>
             {/* show modal for if the item exist in the user basket */}
             <div className={`bg-[#F44336] absolute p-6 rounded-xl text-white ${showModal ? 'block' : 'hidden'}`}>
                 <p>این ایتم قبلا به سبد خرید اضافه شده</p>
@@ -192,6 +191,6 @@ export default function ItemInfo() {
 
                 </div>
             </div>
-        </>
+        </motion.div>
     )
 }
