@@ -20,6 +20,12 @@ let service = [
     { id: 7, title: "اندازه گیری EC ", content: "این اندازه گیری نشانی از مقدار کل مواد مغذی موجود برای گیاهان می‌دهد", img: "/image/page icon/7.svg" },
     { id: 8, title: "ارائه مکمل ", content: "برای رشد بهتر گیاهان و رفع آفات از مکمل ها میتوان استفاده کرد", img: "/image/page icon/8.svg" },
 ]
+let decoratePlant = [
+    { id: 1, name: 'گیاه طبیعی کراسولا', price: 90_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decoratePlant', performance: 4.5, property: { vaseMt: 'چوبی', sol: 'خاک گلدانی شنی و غنی', wight: 4000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "فلاور گاردن", img: ['/image/decoration-flower/item-1.png'], cunt: 1 },
+    { id: 2, name: 'گیاه طبیعی یشم ', price: 15_000_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decoratePlant', performance: 1.5, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 1000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "حساس به افتاب" }, sender: "فتون", img: ['/image/decoration-flower/item-2.png'], cunt: 1 },
+    { id: 3, name: 'گیاه طبیعی بونسای پاچیرا', price: 880_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decoratePlant', performance: 2.3, property: { vaseMt: 'سرامیک', sol: "خاک گلدانی شنی و غنی", wight: 5000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "حساس به افتاب" }, sender: "گاردن شاپ", img: ['/image/decoration-flower/item-3.png'], cunt: 1 },
+    { id: 4, name: 'گیاه طبیعی کراسولا خرفه', price: 169_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decoratePlant', performance: 3.6, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 3000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "سبزوار شاپ", img: ['/image/decoration-flower/item-4.png'], cunt: 1 }
+]
 
 
 
@@ -39,4 +45,4 @@ let service = [
 
 
 
-export { apartmentPlant, apartmentPlantTips, service } 
+export { apartmentPlant, apartmentPlantTips, service, decoratePlant } 
