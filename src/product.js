@@ -26,6 +26,12 @@ let decoratePlant = [
     { id: 3, name: 'گیاه طبیعی بونسای پاچیرا', price: 880_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decoratePlant', performance: 2.3, property: { vaseMt: 'سرامیک', sol: "خاک گلدانی شنی و غنی", wight: 5000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "حساس به افتاب" }, sender: "گاردن شاپ", img: ['/image/decoration-flower/item-3.png'], cunt: 1 },
     { id: 4, name: 'گیاه طبیعی کراسولا خرفه', price: 169_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decoratePlant', performance: 3.6, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 3000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "سبزوار شاپ", img: ['/image/decoration-flower/item-4.png'], cunt: 1 }
 ]
+let decorationPlantTips = [
+    { id: 1, name: 'گیاه رزماری', price: 1_000_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decorationPlantTips', performance: 4.5, property: { vaseMt: 'چوبی', sol: 'خاک گلدانی شنی و غنی', wight: 4000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "فلاور گاردن", img: ['/image/decoration-category/item-1.png'], cunt: 1 },
+    { id: 2, name: 'گیاه آدنیوم ', price: 250_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decorationPlantTips', performance: 1.5, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 1000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "حساس به افتاب" }, sender: "فتون", img: ['/image/decoration-category/item-2.png'], cunt: 1 },
+    { id: 3, name: 'گیاه آشیانتوس', price: 560_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decorationPlantTips', performance: 2.3, property: { vaseMt: 'سرامیک', sol: "خاک گلدانی شنی و غنی", wight: 5000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "حساس به افتاب" }, sender: "گاردن شاپ", img: ['/image/decoration-category/item-3.png'], cunt: 1 },
+    { id: 4, name: 'گیاه آناناسی', price: 2_700_000, categoriFn: "گیاهان تزئینی", categoriEn: 'decorationPlantTips', performance: 3.6, property: { vaseMt: 'پلاستیک', sol: 'خاک گلدانی شنی و غنی', wight: 3000, size: '۲۵۰x۲۵۰x۸۰۰', sunLike: "آفتاب دوست" }, sender: "سبزوار شاپ", img: ['/image/decoration-category/item-4.png'], cunt: 1 }
+]
 
 
 
@@ -45,4 +51,4 @@ let decoratePlant = [
 
 
 
-export { apartmentPlant, apartmentPlantTips, service, decoratePlant } 
+export { apartmentPlant, apartmentPlantTips, service, decoratePlant, decorationPlantTips } 
